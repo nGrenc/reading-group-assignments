@@ -6,7 +6,7 @@ public interface BarInterface {
 		ORDER_WATER, ORDER_COFFEE;
 	}
 
-	BarManager barManagerInstance = new BarManager();
+	BarManagement barManagerInstance = new BarManagement();
 
 	CupOfBeverage[] fulfilBulkOrder(OrderType orderType, int quantity);
 }

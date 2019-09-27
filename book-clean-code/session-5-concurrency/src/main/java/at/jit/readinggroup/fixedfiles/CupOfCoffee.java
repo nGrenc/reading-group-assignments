@@ -2,5 +2,7 @@ package at.jit.readinggroup.fixedfiles;
 
 public class CupOfCoffee extends CupOfBeverage {
 
-	CupOfCoffee() {}
+	CupOfCoffee(Integer orderId) {
+		this.orderId = orderId;
+	}
 }

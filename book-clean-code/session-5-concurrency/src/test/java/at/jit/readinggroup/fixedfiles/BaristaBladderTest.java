@@ -6,7 +6,10 @@ import static org.junit.Assert.assertTrue;
 
 public class BaristaBladderTest {
 
-	public BarManager manager = new BarManager();
+	public BarManagement manager = new BarManagement();
+
+	private int unimportantMachineId = 2;
+	private int unimportantOrderValue = 5;
 
 	@Test
 	public void baristaWithBadBladderShouldTakeLongerToPrepareWater() {
@@ -17,11 +20,11 @@ public class BaristaBladderTest {
 		// when: water is ordered
 		long startOrder;
 		startOrder = System.currentTimeMillis();
-		manager.useWaterTap(baristaWithGoodBladder);
+		manager.useWaterTap(baristaWithGoodBladder, unimportantOrderValue);
 		long timeSpentPreparingWater = System.currentTimeMillis() - startOrder;
 
 		startOrder = System.currentTimeMillis();
-		manager.useWaterTap(baristaWithBadBladder);
+		manager.useWaterTap(baristaWithBadBladder, unimportantOrderValue);
 		long timeSpentOnToiletAndPreparingWater = System.currentTimeMillis() - startOrder;
 
 		// then: it took longer for barista with bad bladder
@@ -37,11 +40,11 @@ public class BaristaBladderTest {
 		// when: coffee is ordered
 		long startOrder;
 		startOrder = System.currentTimeMillis();
-		manager.useEspressoMachine(baristaWithGoodBladder);
+		manager.useEspressoMachine(baristaWithGoodBladder, unimportantOrderValue, unimportantMachineId);
 		long timeSpentPreparingCoffee = System.currentTimeMillis() - startOrder;
 
 		startOrder = System.currentTimeMillis();
-		manager.useEspressoMachine(baristaWithBadBladder);
+		manager.useEspressoMachine(baristaWithBadBladder, unimportantOrderValue, unimportantMachineId);
 		long timeSpentOnToiletAndPreparingCoffee = System.currentTimeMillis() - startOrder;
 
 		// then: it took longer for barista with bad bladder

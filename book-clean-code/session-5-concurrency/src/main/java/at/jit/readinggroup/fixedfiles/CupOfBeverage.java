@@ -1,4 +1,10 @@
 package at.jit.readinggroup.fixedfiles;
 
-public class CupOfBeverage {
+public abstract class CupOfBeverage {
+
+	protected Integer orderId;
+
+	public Integer getOrderId() {
+		return orderId;
+	}
 }
