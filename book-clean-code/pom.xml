@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>session-5-concurrency</module>
+        <module>session-5-asserts</module>
     </modules>
 
 
