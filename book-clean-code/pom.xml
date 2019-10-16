@@ -14,6 +14,7 @@
     <modules>
         <module>session-5-concurrency</module>
         <module>session-5-asserts</module>
+        <module>session-6-cleanup-task-sentences</module>
     </modules>
 
 
