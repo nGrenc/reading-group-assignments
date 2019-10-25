@@ -25,71 +25,157 @@ public class TheGreatSentencesFinalizerClassTest {
 	public void shouldFailWhenSentenceDoesNotMatchSchema() {
 		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
 
-		finalizer.finishSentence("dog ?");
+		finalizer.findAllSentences("dog ?");
+	}
+
+	@Test (expected = TheGreatSentencesFinalizerClass.InvalidSchemaException.class)
+	public void shouldFailWhenSchemaIsInvalid() {
+		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvnb", diktionary);
+
+		finalizer.findAllSentences("dog ?");
 	}
 
 	@Test
 	public void shouldReturnIfSentenceIsComplete() {
 		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
 
-		String[] newSentencess = finalizer.finishSentence("dog chases cat");
+		List<String> actual = finalizer.findAllSentences("dog chases cat");
 
-		assertEquals(1, newSentencess.length);
-		assertContains(newSentencess, "dog chases cat");
-	}
+		List<String> expected = new ArrayList<>();
+		expected.add("dog chases cat");
 
-	@Test
-	public void shouldFinishLastNoun() {
-		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
-
-		String[] newSentencess = finalizer.finishSentence("dog chases ?");
-
-		assertContains(newSentencess, "dog chases cat");
-		assertContains(newSentencess, "dog chases dog");
+		assertEquals(expected,actual);
 	}
 
 	@Test
 	public void shouldFinishMiddleVerb() {
 		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
 
-		String[] newSentencess = finalizer.finishSentence("dog ? cat");
+		List<String> actual = finalizer.findAllSentences("dog ? cat");
 
-		assertContains(newSentencess, "dog chases cat");
+		List<String> expected = new ArrayList<>();
+		expected.add("dog chases cat");
+		expected.add("dog avoids cat");
+
+		assertTrue(expected.size() == actual.size() &&
+				expected.containsAll(actual) && actual.containsAll(expected));
 	}
+
+	@Test
+	public void shouldSelectNounsPlural() {
+		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
+
+		List<String> actual = finalizer.findAllSentences("? chase cat");
+
+		List<String> expected = new ArrayList<>();
+		expected.add("dogs chase cat");
+		expected.add("cats chase cat");
+
+		assertTrue(expected.size() == actual.size() &&
+				expected.containsAll(actual) && actual.containsAll(expected));
+
+	}
+
+	@Test
+	public void shouldSelectNounsSingular() {
+		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
+
+		List<String> actual = finalizer.findAllSentences("? chases cat");
+
+		List<String> expected = new ArrayList<>();
+		expected.add("dog chases cat");
+		expected.add("cat chases cat");
+
+		assertTrue(expected.size() == actual.size() &&
+				expected.containsAll(actual) && actual.containsAll(expected));
+	}
+
+	@Test
+	public void shouldFinishLastNoun() {
+		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
+
+		List<String> actual = finalizer.findAllSentences("dog chases ?");
+
+		List<String> expected = new ArrayList<>();
+		expected.add("dog chases cat");
+		expected.add("dog chases dog");
+		expected.add("dog chases cats");
+		expected.add("dog chases dogs");
+
+		assertTrue(expected.size() == actual.size() &&
+				expected.containsAll(actual) && actual.containsAll(expected));
+	}
+
+	@Test
+	public void shouldFinishMissingVerbAndNoun() {
+		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
+
+		List<String> actual = finalizer.findAllSentences("dog ? ?");
+
+		List<String> expected = new ArrayList<>();
+		expected.add("dog chases cat");
+		expected.add("dog chases dog");
+		expected.add("dog chases cats");
+		expected.add("dog chases dogs");
+
+		expected.add("dog avoids cat");
+		expected.add("dog avoids dog");
+		expected.add("dog avoids cats");
+		expected.add("dog avoids dogs");
+
+		assertTrue(expected.size() == actual.size() &&
+				expected.containsAll(actual) && actual.containsAll(expected));
+	}
+
 
 	@Test
 	public void shouldCompleteMultipleMissing() {
 		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
 
-		String[] newSentencess = finalizer.finishSentence("? ? ?");
+		List<String> actual = finalizer.findAllSentences("? ? ?");
 
-		assertContains(newSentencess, "dog chases cat");
-	}
+		List<String> expected = new ArrayList<>();
+		expected.add("dog chases cat");
+		expected.add("dog chases dog");
+		expected.add("dog chases cats");
+		expected.add("dog chases dogs");
 
-	@Test
-	public void shouldSelectPlural() {
-		TheGreatSentencesFinalizerClass finalizer = new TheGreatSentencesFinalizerClass("nvn", diktionary);
+		expected.add("dogs chase cat");
+		expected.add("dogs chase dog");
+		expected.add("dogs chase cats");
+		expected.add("dogs chase dogs");
 
-		String[] newSentencess = finalizer.finishSentence("dogs ? cat");
+		expected.add("cat chases cat");
+		expected.add("cat chases dog");
+		expected.add("cat chases cats");
+		expected.add("cat chases dogs");
 
-		assertContains(newSentencess, "dogs chase cat");
-		assertNotContains(newSentencess, "dogs chases cat");
-	}
+		expected.add("cats chase cat");
+		expected.add("cats chase dog");
+		expected.add("cats chase cats");
+		expected.add("cats chase dogs");
 
+		expected.add("dog avoids cat");
+		expected.add("dog avoids dog");
+		expected.add("dog avoids cats");
+		expected.add("dog avoids dogs");
 
-	private void assertNotContains(String[] sentenceCollections, String sentence) {
-		if (Arrays.asList(sentenceCollections).contains(sentence)) {
-			fail();
-		}
-	}
+		expected.add("dogs avoid cat");
+		expected.add("dogs avoid dog");
+		expected.add("dogs avoid cats");
+		expected.add("dogs avoid dogs");
 
-	private void assertContains(String[] sentenceCollections, String sentence) {
-		assertContains(Arrays.asList(sentenceCollections), sentence);
-	}
+		expected.add("cat avoids cat");
+		expected.add("cat avoids dog");
+		expected.add("cat avoids cats");
+		expected.add("cat avoids dogs");
 
-	private void assertContains(List<String> sentenceCollections, String sentence) {
-		if (! sentenceCollections.contains(sentence)) {
-			fail();
-		}
+		expected.add("cats avoid cat");
+		expected.add("cats avoid dog");
+		expected.add("cats avoid cats");
+		expected.add("cats avoid dogs");
+
+		assertTrue(expected.size() == actual.size() &&
+				expected.containsAll(actual) && actual.containsAll(expected));
 	}
 }
