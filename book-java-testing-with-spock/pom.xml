@@ -9,24 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>book-clean-code</artifactId>
+    <artifactId>book-java-testing-with-spock</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>session-5-concurrency</module>
-        <module>session-5-asserts</module>
-        <module>session-6-cleanup-task-sentences</module>
+        <module>session-1-introduction</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 
 </project>
