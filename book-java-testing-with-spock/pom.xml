@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>session-1-introduction</module>
+        <module>session-2-spock-features</module>
     </modules>
 
 
