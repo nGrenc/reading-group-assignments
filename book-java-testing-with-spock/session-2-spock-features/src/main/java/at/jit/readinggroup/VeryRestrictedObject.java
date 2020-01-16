@@ -2,7 +2,7 @@ package at.jit.readinggroup;
 
 public class VeryRestrictedObject {
 
-    private boolean restrictedValue = false;
+    protected boolean restrictedValue = false;
 
     public VeryRestrictedObject() {
     }
