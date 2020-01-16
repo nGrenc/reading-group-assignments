@@ -14,6 +14,7 @@
     <modules>
         <module>session-1-introduction</module>
         <module>session-2-spock-features</module>
+        <module>session-3-writing-unit-tests</module>
     </modules>
 
 
