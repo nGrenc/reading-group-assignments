@@ -15,6 +15,7 @@
         <module>session-1-introduction</module>
         <module>session-2-spock-features</module>
         <module>session-3-writing-unit-tests</module>
+        <module>session-4-parameterized-tests-and-mocks</module>
     </modules>
 
 
