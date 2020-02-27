@@ -9,15 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>book-java-testing-with-spock</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>session-1-introduction</module>
-        <module>session-2-spock-features</module>
-        <module>session-3-writing-unit-tests</module>
-        <module>session-4-parameterized-tests-and-mocks</module>
-        <module>session-5-integration-tests</module>
-    </modules>
-
+    <artifactId>session-5-integration-tests</artifactId>
 
 </project>
