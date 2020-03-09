@@ -17,6 +17,7 @@
         <module>session-3-writing-unit-tests</module>
         <module>session-4-parameterized-tests-and-mocks</module>
         <module>session-5-integration-tests</module>
+        <module>session-6-spies</module>
     </modules>
 
 
