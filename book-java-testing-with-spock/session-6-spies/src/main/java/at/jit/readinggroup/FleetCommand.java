@@ -13,7 +13,7 @@ public class FleetCommand {
 
     public String notifyAboutDestruction(Starship starship) {
         if (! starshipsInCommand.remove(starship)) {
-            throw new RuntimeException("Starship " + starship.getName() + "is not part of our fleet");
+            throw new RuntimeException("Starship " + starship.getName() + " is not part of our fleet");
         }
         return "Farewell " + starship.getName();
     }

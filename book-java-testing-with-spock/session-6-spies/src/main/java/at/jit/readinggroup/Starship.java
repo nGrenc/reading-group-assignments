@@ -5,7 +5,7 @@ import java.util.Random;
 public class Starship {
 
     // @Autowired
-    private FleetCommand fleetCommand;
+    FleetCommand fleetCommand;
 
     private String starshipName;
 
